@@ -20,7 +20,15 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to="/login" />,
+      element: state.token ? (
+        state.role === 'admin' ? (
+          <Navigate to="/admin" />
+        ) : (
+          <Navigate to="/driver" />
+        )
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       path: "/login",
