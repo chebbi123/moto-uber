@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "myRides": "Mes Courses",
+    "profile": "Profil",
+    "bookNow": "Réserver"
+  },
+  "hero": {
+    "title": "Rapide & Abordable",
+    "subtitle": "Courses en Moto",
+    "description": "Naviguez dans les rues de Tunisie en toute facilité. Réservez une course en moto et arrivez à destination rapidement et en toute sécurité.",
+    "bookRide": "Réserver une Course",
+    "becomeDriver": "Devenir Chauffeur"
+  },
+  "features": {
+    "title": "Fonctionnalités",
+    "subtitle": "Pourquoi Choisir Moto Uber Tunisia ?",
+    "description": "Découvrez la façon la plus rapide de voyager dans les villes tunisiennes avec notre service de taxi moto professionnel.",
+    "items": {
+      "fast": {
+        "title": "Rapide & Fiable",
+        "description": "Évitez les embouteillages et arrivez à l'heure avec notre service de moto rapide"
+      },
+      "safe": {
+        "title": "Sûr & Sécurisé",
+        "description": "Chauffeurs vérifiés et formés pour votre sécurité"
+      },
+      "tracking": {
+        "title": "Suivi en Temps Réel",
+        "description": "Suivez votre course en temps réel avec notre système GPS avancé"
+      },
+      "drivers": {
+        "title": "Chauffeurs Bien Notés",
+        "description": "Voyagez avec nos chauffeurs professionnels hautement notés"
+      },
+      "support": {
+        "title": "Support 24/7",
+        "description": "Support client disponible 24h/24 et 7j/7 pour votre confort"
+      },
+      "notifications": {
+        "title": "Notifications Instantanées",
+        "description": "Recevez des mises à jour en temps réel sur l'état de votre course"
+      }
+    }
+  },
+  "download": {
+    "title": "Prêt à commencer ?",
+    "subtitle": "Téléchargez notre application aujourd'hui.",
+    "description": "Obtenez l'application Moto Uber Tunisia maintenant et découvrez la façon la plus rapide de voyager en ville.",
+    "ios": "Télécharger pour iOS",
+    "android": "Télécharger pour Android"
+  }
+}

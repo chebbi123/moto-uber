@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Home",
+    "myRides": "My Rides",
+    "profile": "Profile",
+    "bookNow": "Book Now"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "noNotifications": "No notifications available."
+  },
+  "hero": {
+    "title": "Fast & Affordable",
+    "subtitle": "Motorcycle Rides",
+    "description": "Navigate Tunisia's busy streets with ease. Book a motorcycle ride and arrive at your destination quickly and safely.",
+    "bookRide": "Book a Ride",
+    "becomeDriver": "Become a Driver"
+  },
+  "features": {
+    "title": "Features",
+    "subtitle": "Why Choose Moto Uber Tunisia?",
+    "description": "Experience the fastest way to travel through Tunisia's cities with our professional motorcycle taxi service.",
+    "items": {
+      "fast": {
+        "title": "Fast & Reliable",
+        "description": "Beat traffic and arrive on time with our quick motorcycle service"
+      },
+      "safe": {
+        "title": "Safe & Secure",
+        "description": "Verified and trained drivers for your safety"
+      },
+      "tracking": {
+        "title": "Real-time Tracking",
+        "description": "Track your ride in real-time with our advanced GPS system"
+      },
+      "drivers": {
+        "title": "Top Rated Drivers",
+        "description": "Experience rides with our highly rated professional drivers"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Round-the-clock customer support for your convenience"
+      },
+      "notifications": {
+        "title": "Instant Notifications",
+        "description": "Get real-time updates about your ride status"
+      }
+    }
+  },
+  "download": {
+    "title": "Ready to get started?",
+    "subtitle": "Download our app today.",
+    "description": "Get the Moto Uber Tunisia app now and experience the fastest way to travel through the city.",
+    "ios": "Download for iOS",
+    "android": "Download for Android"
+  }
+}
