@@ -20,9 +20,9 @@ export default function PriceEstimator() {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Estimate Ride Price</h2>
-      <div className="grid grid-cols-1 gap-4 mb-4">
+    <div className="p-6 card max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">Estimate Ride Price</h2>
+      <div className="grid grid-cols-1 gap-4 mb-6">
         <input
           type="number"
           placeholder="Pickup Latitude"
