@@ -1,7 +1,7 @@
+
 import React, { createContext, useReducer, useContext } from 'react';
 import axios from 'axios';
 
-// Initial state
 const initialState = {
   user: null,
   token: localStorage.getItem('token') || null,
@@ -15,7 +15,6 @@ const initialState = {
   drivers: [],
 };
 
-// Reducer function
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_USER':
@@ -41,58 +40,56 @@ const reducer = (state, action) => {
       return { ...state, rides: action.payload };
     case 'SET_DRIVERS':
       return { ...state, drivers: action.payload };
-    case 'FETCH_NOTIFICATIONS':
-      return { ...state, notifications: action.payload };
     case 'LOGOUT':
       localStorage.removeItem('token');
       localStorage.removeItem('role');
-      return {
-        ...state,
-        user: null,
-        token: null,
-        role: null,
-        notifications: [],
-        location: null,
-        status: null,
-        users: [],
-        rides: [],
-        drivers: [],
-      };
+      return initialState;
     default:
-      console.error(`Unhandled action type: ${action.type}`);
       return state;
   }
 };
 
-// Create context
 const StoreContext = createContext();
 
-// StoreProvider component
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Fetch notifications function
-  const fetchNotifications = async () => {
-    if (!state.token) return;
-    try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/notifications`, {
-        headers: { Authorization: `Bearer ${state.token}` },
-      });
-      dispatch({ type: 'FETCH_NOTIFICATIONS', payload: data });
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-      if (error.response?.status === 401) {
-        dispatch({ type: 'LOGOUT' });
-      }
-    }
+  const api = axios.create({
+    baseURL: '/api',
+    headers: {
+      Authorization: `Bearer ${state.token}`,
+    },
+  });
+
+  const actions = {
+    login: async (credentials) => {
+      const { data } = await api.post('/auth/login', credentials);
+      dispatch({ type: 'SET_TOKEN', payload: data.token });
+      dispatch({ type: 'SET_USER', payload: data.user });
+      dispatch({ type: 'SET_ROLE', payload: data.user.role });
+    },
+    logout: () => dispatch({ type: 'LOGOUT' }),
+    updateLocation: (location) => dispatch({ type: 'SET_LOCATION', payload: location }),
+    updateStatus: (status) => dispatch({ type: 'SET_STATUS', payload: status }),
+    fetchUsers: async () => {
+      const { data } = await api.get('/users');
+      dispatch({ type: 'SET_USERS', payload: data });
+    },
+    fetchRides: async () => {
+      const { data } = await api.get('/rides');
+      dispatch({ type: 'SET_RIDES', payload: data });
+    },
+    fetchDrivers: async () => {
+      const { data } = await api.get('/drivers');
+      dispatch({ type: 'SET_DRIVERS', payload: data });
+    },
   };
 
   return (
-    <StoreContext.Provider value={{ state, dispatch, fetchNotifications }}>
+    <StoreContext.Provider value={{ state, dispatch, actions }}>
       {children}
     </StoreContext.Provider>
   );
 };
 
-// Custom hook to use the store
 export const useStore = () => useContext(StoreContext);

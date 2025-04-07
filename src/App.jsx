@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import AdminDashboard from './components/AdminDashboard';
 import DriverDashboard from './components/DriverDashboard';
@@ -7,52 +8,51 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { useStore } from './context/StoreContext';
 
-function App() {
-  const { state, fetchNotifications } = useStore();
-  const { token, role } = state;
+const App = () => {
+  const { state } = useStore();
 
-  useEffect(() => {
-    fetchNotifications();
-  }, [token, fetchNotifications]); // Only re-run when `token` changes
+  const ProtectedRoute = ({ children, requiredRole }) => {
+    if (!state.token) return <Navigate to="/login" />;
+    if (requiredRole && state.role !== requiredRole) return <Navigate to="/" />;
+    return children;
+  };
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: token ? (
-        role === 'admin' ? (
-          <Navigate replace to="/admin-dashboard" />
-        ) : role === 'driver' ? (
-          <Navigate replace to="/driver-dashboard" />
-        ) : (
-          <Navigate replace to="/dashboard" />
-        )
-      ) : (
-        <Navigate replace to="/login" />
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/admin",
+      element: (
+        <ProtectedRoute requiredRole="admin">
+          <AdminDashboard />
+        </ProtectedRoute>
       ),
     },
     {
-      path: '/login',
-      element: !token ? <Login /> : <Navigate replace to="/" />,
+      path: "/driver",
+      element: (
+        <ProtectedRoute requiredRole="driver">
+          <DriverDashboard />
+        </ProtectedRoute>
+      ),
     },
     {
-      path: '/signup',
-      element: !token ? <Signup /> : <Navigate replace to="/" />,
-    },
-    {
-      path: '/admin-dashboard',
-      element: role === 'admin' ? <AdminDashboard /> : <Navigate replace to="/" />,
-    },
-    {
-      path: '/driver-dashboard',
-      element: role === 'driver' ? <DriverDashboard /> : <Navigate replace to="/" />,
-    },
-    {
-      path: '/dashboard',
-      element: role === 'user' ? <RideTracking /> : <Navigate replace to="/" />,
+      path: "/track/:rideId",
+      element: (
+        <ProtectedRoute>
+          <RideTracking />
+        </ProtectedRoute>
+      ),
     },
   ]);
 
   return <RouterProvider router={router} />;
-}
+};
 
 export default App;
