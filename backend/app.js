@@ -9,6 +9,10 @@ import adminRoutes from './routes/adminRoutes.js';
 import driverRoutes from './routes/driverRoutes.js';
 
 const app = express();
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://moto-uber.netlify.app'
+];
 
 app.use(cors());
 app.use(express.json());
