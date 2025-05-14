@@ -14,7 +14,19 @@ const allowedOrigins = [
   'https://moto-uber.netlify.app'
 ];
 
-app.use(cors());
+// Configuration CORS
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
+  credentials: true // si tu utilises les cookies ou headers d'auth
+}));
+
 app.use(express.json());
 
 // Language detection middleware
